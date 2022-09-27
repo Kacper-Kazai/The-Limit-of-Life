@@ -1,3 +1,4 @@
+/*
  * The Limit of Life
  * Copyright (c) 2022 Kacper Kazai
  *
@@ -18,3 +19,19 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
+ */
+
+package dev.kazai.fabricmc.tlol.networking;
+
+import dev.kazai.fabricmc.tlol.networking.packet.ConfigSyncS2CPacket;
+import dev.kazai.fabricmc.tlol.networking.packet.LaudanumCooldownSyncS2CPacket;
+import dev.kazai.fabricmc.tlol.networking.packet.LivesSyncS2CPacket;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+
+public class TLoLMessages {
+    public static void registerS2CPackets(){
+        ClientPlayNetworking.registerGlobalReceiver(ConfigSyncS2CPacket.IDENTIFIER, ConfigSyncS2CPacket::receive);
+        ClientPlayNetworking.registerGlobalReceiver(LivesSyncS2CPacket.IDENTIFIER, LivesSyncS2CPacket::receive);
+        ClientPlayNetworking.registerGlobalReceiver(LaudanumCooldownSyncS2CPacket.IDENTIFIER, LaudanumCooldownSyncS2CPacket::receive);
+    }
+}

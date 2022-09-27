@@ -1,3 +1,4 @@
+/*
  * The Limit of Life
  * Copyright (c) 2022 Kacper Kazai
  *
@@ -18,3 +19,21 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
+ */
+
+package dev.kazai.fabricmc.tlol.events.handler;
+
+import dev.kazai.fabricmc.tlol.util.IEntityData;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.network.ServerPlayerEntity;
+
+public class PlayerTickHandler {
+    public static void onStartTick(MinecraftServer server) {
+        for(ServerPlayerEntity player : server.getPlayerManager().getPlayerList()) {
+            IEntityData dataSaver = (IEntityData)player;
+
+            int laudanumCooldown = dataSaver.getLaudanumCooldown();
+            if(laudanumCooldown > 0) dataSaver.setLaudanumCooldown(--laudanumCooldown);
+        }
+    }
+}

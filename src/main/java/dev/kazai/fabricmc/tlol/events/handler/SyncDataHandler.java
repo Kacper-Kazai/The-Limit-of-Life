@@ -1,3 +1,4 @@
+/*
  * The Limit of Life
  * Copyright (c) 2022 Kacper Kazai
  *
@@ -18,3 +19,27 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
+ */
+
+package dev.kazai.fabricmc.tlol.events.handler;
+
+import dev.kazai.fabricmc.tlol.configs.TLoLConfigs;
+import dev.kazai.fabricmc.tlol.systems.LivesSystem;
+import dev.kazai.fabricmc.tlol.networking.packet.ConfigSyncS2CPacket;
+import dev.kazai.fabricmc.tlol.networking.packet.LivesSyncS2CPacket;
+import dev.kazai.fabricmc.tlol.util.IEntityData;
+import net.fabricmc.fabric.api.networking.v1.PacketSender;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.network.ServerPlayNetworkHandler;
+
+public class SyncDataHandler {
+    public static void onPlayReady(ServerPlayNetworkHandler handler, PacketSender sender, MinecraftServer server) {
+        ConfigSyncS2CPacket.send(handler.player, TLoLConfigs.DEFAULT.getMaxLives(), TLoLConfigs.DEFAULT.getDefaultLives(), TLoLConfigs.DEFAULT.getLaudanumUsageCooldown());
+
+        int lives = LivesSystem.getLives(handler.player.getServer(), handler.player.getUuid());
+        LivesSyncS2CPacket.send(handler.player, lives);
+
+        IEntityData dataSaver = (IEntityData)handler.player;
+        dataSaver.setLaudanumCooldown(dataSaver.getLaudanumCooldown());
+    }
+}

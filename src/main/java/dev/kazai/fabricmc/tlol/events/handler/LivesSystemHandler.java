@@ -1,3 +1,4 @@
+/*
  * The Limit of Life
  * Copyright (c) 2022 Kacper Kazai
  *
@@ -18,3 +19,28 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
+ */
+
+package dev.kazai.fabricmc.tlol.events.handler;
+
+import dev.kazai.fabricmc.tlol.configs.TLoLConfigs;
+import dev.kazai.fabricmc.tlol.systems.LivesSystem;
+import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.server.network.ServerPlayerEntity;
+
+public class LivesSystemHandler {
+    public static void afterRespawn(ServerPlayerEntity oldPlayer, ServerPlayerEntity newPlayer, boolean alive){
+        if(alive) return;
+        boolean result = LivesSystem.subLives(newPlayer.getServer(), newPlayer.getUuid(), 1);
+        if(result) return;
+
+        ServerCommandSource source = newPlayer.getServer().getCommandSource()
+                .withEntity(newPlayer)
+                .withPosition(newPlayer.getPos())
+                .withRotation(newPlayer.getRotationClient())
+                .withSilent();
+
+        String command = TLoLConfigs.DEFAULT.getCommandAfterFinalDeath();
+        newPlayer.getServer().getCommandManager().execute(source, command);
+    }
+}

@@ -1,3 +1,4 @@
+/*
  * The Limit of Life
  * Copyright (c) 2022 Kacper Kazai
  *
@@ -18,3 +19,15 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
+ */
+
+package dev.kazai.fabricmc.tlol.commands;
+
+import dev.kazai.fabricmc.tlol.commands.command.LivesCommand;
+import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
+
+public class TLoLCommands {
+    public static void registerCommands() {
+        CommandRegistrationCallback.EVENT.register(new LivesCommand());
+    }
+}

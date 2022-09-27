@@ -1,3 +1,4 @@
+/*
  * The Limit of Life
  * Copyright (c) 2022 Kacper Kazai
  *
@@ -18,3 +19,29 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
+ */
+
+package dev.kazai.fabricmc.tlol;
+
+import dev.kazai.fabricmc.tlol.commands.TLoLCommands;
+import dev.kazai.fabricmc.tlol.configs.TLoLConfigs;
+import dev.kazai.fabricmc.tlol.events.TLoLEvents;
+import dev.kazai.fabricmc.tlol.item.TLoLItems;
+import dev.kazai.fabricmc.tlol.loottables.TLoLLootTables;
+import net.fabricmc.api.ModInitializer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public class TLoL implements ModInitializer {
+	public static final String MOD_ID = "tlol";
+	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
+
+	@Override
+	public void onInitialize() {
+		TLoLConfigs.registerConfigs();
+		TLoLItems.registerItems();
+		TLoLLootTables.registerLootTables();
+		TLoLCommands.registerCommands();
+		TLoLEvents.registerEvents();
+	}
+}

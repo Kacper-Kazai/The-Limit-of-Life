@@ -1,38 +1,35 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
+  "id": "tlol",
   "version": "${version}",
-
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "The Limit of Life",
+  "description": "Adds limited lives to the game!",
   "authors": [
-    "Me!"
+    "Kacper Kazai"
   ],
-  "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
-  },
 
-  "license": "CC0-1.0",
-  "icon": "assets/modid/icon.png",
+  "license": "MIT",
+  "icon": "assets/tlol/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.fabricmc.example.ExampleMod"
+      "dev.kazai.fabricmc.tlol.TLoL"
+    ],
+    "client": [
+      "dev.kazai.fabricmc.tlol.TLoLClient"
     ]
   },
   "mixins": [
-    "modid.mixins.json"
+    "tlol.mixins.json"
   ],
 
   "depends": {
-    "fabricloader": ">=0.14.9",
-    "fabric-api": "*",
-    "minecraft": "~1.19",
+    "fabricloader": ">=0.14.6",
+    "fabric": "*",
+    "minecraft": "~1.18.2",
     "java": ">=17"
   },
   "suggests": {
-    "another-mod": "*"
   }
 }

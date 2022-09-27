@@ -1,3 +1,4 @@
+/*
  * The Limit of Life
  * Copyright (c) 2022 Kacper Kazai
  *
@@ -18,3 +19,21 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
+ */
+
+package dev.kazai.fabricmc.tlol.events;
+
+import dev.kazai.fabricmc.tlol.events.handler.LivesSystemHandler;
+import dev.kazai.fabricmc.tlol.events.handler.PlayerTickHandler;
+import dev.kazai.fabricmc.tlol.events.handler.SyncDataHandler;
+import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
+
+public class TLoLEvents {
+    public static void registerEvents(){
+        ServerPlayConnectionEvents.JOIN.register(SyncDataHandler::onPlayReady);
+        ServerPlayerEvents.AFTER_RESPAWN.register(LivesSystemHandler::afterRespawn);
+        ServerTickEvents.START_SERVER_TICK.register(PlayerTickHandler::onStartTick);
+    }
+}

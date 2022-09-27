@@ -1,0 +1,52 @@
+{
+  "lives_system": {
+    "default_lives": 3,
+    "max_lives": 3,
+    "command_after_final_death": "gamemode spectator @s",
+    "display_on_screen": {
+      "enabled": true,
+      "x": {
+        "window": 0.5,
+        "offset": 106
+      },
+      "y": {
+        "window": 1,
+        "offset": 39
+      }
+    }
+  },
+  "laudanum": {
+    "usage_cooldown": 0,
+    "nbt": "{CustomPotionEffects:[{Id:\"minecraft:regeneration\",Amplifier:0b,Duration:400},{Id:\"minecraft:strength\",Amplifier:0b,Duration:400},{Id:\"minecraft:nausea\",Amplifier:0b,Duration:400}]}",
+    "loot_tables": [
+      {
+        "entry": "minecraft:chests/simple_dungeon",
+        "chance": 0.0155
+      },
+      {
+        "entry": "minecraft:chests/abandoned_mineshaft",
+        "chance": 0.007
+      },
+      {
+        "entry": "chests/ancient_city",
+        "chance": 0.042
+      },
+      {
+        "entry": "chests/bastion_treasure",
+        "chance": 0.0325
+      },
+      {
+        "entry": "chests/desert_pyramid",
+        "chance": 0.013
+      },
+      {
+        "entry": "chests/ruined_portal",
+        "chance": 0.0075
+      },
+      {
+        "entry": "chests/woodland_mansion",
+        "chance": 0.0155
+      }
+    ]
+  }
+}

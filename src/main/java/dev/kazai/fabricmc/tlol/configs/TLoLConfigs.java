@@ -1,3 +1,4 @@
+/*
  * The Limit of Life
  * Copyright (c) 2022 Kacper Kazai
  *
@@ -18,3 +19,22 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
+ */
+
+package dev.kazai.fabricmc.tlol.configs;
+
+import static dev.kazai.fabricmc.tlol.TLoL.LOGGER;
+import static dev.kazai.fabricmc.tlol.TLoL.MOD_ID;
+
+public class TLoLConfigs {
+    public static final Default DEFAULT = register(new Default());
+
+    public static void registerConfigs(){
+        LOGGER.debug("Registering Configs for " + MOD_ID);
+    }
+
+    private static <T extends Config> T register(T config){
+        config.load();
+        return config;
+    }
+}

@@ -1,0 +1,6 @@
+{
+  "item.tlol.laudanum": "Laudanum",
+  "item.tlol.laudanum.tooltip": "a medicine soothes body and soul.",
+  "item.tlol.laudanum.cooldown": "Cooldown: %s",
+  "item.tlol.tooltip.more_information": "Press Shift for more information!"
+}
