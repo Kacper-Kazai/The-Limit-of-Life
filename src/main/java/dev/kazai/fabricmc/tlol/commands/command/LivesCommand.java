@@ -29,12 +29,12 @@ import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import dev.kazai.fabricmc.tlol.configs.TLoLConfigs;
 import dev.kazai.fabricmc.tlol.systems.LivesSystem;
-import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
+import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
+import net.minecraft.command.CommandRegistryAccess;
 import net.minecraft.command.argument.GameProfileArgumentType;
 import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.Text;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
@@ -47,7 +47,7 @@ import static net.minecraft.server.command.CommandManager.*;
 
 public class LivesCommand implements CommandRegistrationCallback {
     @Override
-    public void register(CommandDispatcher<ServerCommandSource> dispatcher, boolean dedicated) {
+    public void register(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess registryAccess, RegistrationEnvironment environment) {
         dispatcher.register(
                 literal("lives")
                         .executes(ctx -> executeGet(ctx.getSource(), Collections.singleton(ctx.getSource().getPlayer().getGameProfile())))
@@ -91,7 +91,7 @@ public class LivesCommand implements CommandRegistrationCallback {
         String playerName = "target";
         if(gameProfile.getName() != null) playerName = gameProfile.getName();
 
-        source.sendFeedback(new TranslatableText("commands.scoreboard.players.get.success", playerName, lives, "lives"), false);
+        source.sendFeedback(Text.translatable("commands.scoreboard.players.get.success", playerName, lives, "lives"), false);
         return lives;
     }
     private static int executeReset(ServerCommandSource source, Collection<GameProfile> gameProfiles) {
@@ -109,9 +109,9 @@ public class LivesCommand implements CommandRegistrationCallback {
         }
 
         if (gameProfiles.size() == 1 && playerName != null) {
-            source.sendFeedback(new TranslatableText("commands.scoreboard.players.reset.specific.single", "lives", playerName), true);
+            source.sendFeedback(Text.translatable("commands.scoreboard.players.reset.specific.single", "lives", playerName), true);
         } else {
-            source.sendFeedback(new TranslatableText("commands.scoreboard.players.reset.specific.multiple", "lives", playersCount), true);
+            source.sendFeedback(Text.translatable("commands.scoreboard.players.reset.specific.multiple", "lives", playersCount), true);
         }
 
         return playersCount;
@@ -131,9 +131,9 @@ public class LivesCommand implements CommandRegistrationCallback {
         }
 
         if (gameProfiles.size() == 1 && playerName != null) {
-            source.sendFeedback(new TranslatableText("commands.scoreboard.players.set.success.single", "lives", playerName, lives), true);
+            source.sendFeedback(Text.translatable("commands.scoreboard.players.set.success.single", "lives", playerName, lives), true);
         } else {
-            source.sendFeedback(new TranslatableText("commands.scoreboard.players.set.success.multiple", "lives", playersCount, lives), true);
+            source.sendFeedback(Text.translatable("commands.scoreboard.players.set.success.multiple", "lives", playersCount, lives), true);
         }
         return lives * playersCount;
     }
@@ -153,9 +153,9 @@ public class LivesCommand implements CommandRegistrationCallback {
 
         int total = playersCount * lives;
         if (gameProfiles.size() == 1 && playerName != null) {
-            source.sendFeedback(new TranslatableText("commands.scoreboard.players.add.success.single", lives, "lives", playerName, total), true);
+            source.sendFeedback(Text.translatable("commands.scoreboard.players.add.success.single", lives, "lives", playerName, total), true);
         } else {
-            source.sendFeedback(new TranslatableText("commands.scoreboard.players.add.success.multiple", lives, "lives", playersCount), true);
+            source.sendFeedback(Text.translatable("commands.scoreboard.players.add.success.multiple", lives, "lives", playersCount), true);
         }
         return total;
     }
@@ -176,9 +176,9 @@ public class LivesCommand implements CommandRegistrationCallback {
 
         int total = playersCount * lives;
         if (gameProfiles.size() == 1 && playerName != null) {
-            source.sendFeedback(new TranslatableText("commands.scoreboard.players.add.success.single", lives, "lives", playerName, total), true);
+            source.sendFeedback(Text.translatable("commands.scoreboard.players.add.success.single", lives, "lives", playerName, total), true);
         } else {
-            source.sendFeedback(new TranslatableText("commands.scoreboard.players.add.success.multiple", lives, "lives", playersCount), true);
+            source.sendFeedback(Text.translatable("commands.scoreboard.players.add.success.multiple", lives, "lives", playersCount), true);
         }
         return total;
     }

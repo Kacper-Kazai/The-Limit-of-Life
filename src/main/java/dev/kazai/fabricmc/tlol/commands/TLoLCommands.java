@@ -24,7 +24,7 @@
 package dev.kazai.fabricmc.tlol.commands;
 
 import dev.kazai.fabricmc.tlol.commands.command.LivesCommand;
-import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
+import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 
 public class TLoLCommands {
     public static void registerCommands() {

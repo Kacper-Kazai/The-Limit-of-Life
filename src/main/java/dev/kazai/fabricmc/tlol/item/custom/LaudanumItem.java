@@ -40,11 +40,8 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.*;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
@@ -128,10 +125,10 @@ public class LaudanumItem extends Item {
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add((new TranslatableText("item.tlol.laudanum.tooltip")).formatted(Formatting.GRAY));
+        tooltip.add((Text.translatable("item.tlol.laudanum.tooltip")).formatted(Formatting.GRAY));
         if(LaudanumCooldownSyncS2CPacket.getCooldown() <= 0) return;
-        if(Screen.hasShiftDown()) tooltip.add(new TranslatableText("item.tlol.laudanum.cooldown", LaudanumCooldownSyncS2CPacket.getCooldown()/20 + "s"));
-        else tooltip.add(new TranslatableText("item.tlol.tooltip.more_information").formatted(Formatting.YELLOW));
+        if(Screen.hasShiftDown()) tooltip.add(Text.translatable("item.tlol.laudanum.cooldown", LaudanumCooldownSyncS2CPacket.getCooldown()/20 + "s"));
+        else tooltip.add(Text.translatable("item.tlol.tooltip.more_information").formatted(Formatting.YELLOW));
     }
 
     @Override

@@ -41,6 +41,6 @@ public class LivesSystemHandler {
                 .withSilent();
 
         String command = TLoLConfigs.DEFAULT.getCommandAfterFinalDeath();
-        newPlayer.getServer().getCommandManager().execute(source, command);
+        newPlayer.getServer().getCommandManager().executeWithPrefix(source, command);
     }
 }
